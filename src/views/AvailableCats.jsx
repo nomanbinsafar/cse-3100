@@ -12,6 +12,7 @@ const availableCats = [
 export default function AvailableCats() {
   const [cats, setCats] = useState([]);
   const [searchTerm,setSearchTerm]=useState('');
+  const [selectedBreed, setSelectedBreed] = useState('');
 
   useEffect(() => {
     // Fetch cat images from an API endpoint and assign it to the featuredCats list
@@ -37,9 +38,15 @@ export default function AvailableCats() {
     setSearchTerm(e.target.value);
   };
 
-  //filter korar logic ekhane
+  //handler for filtering cats by breed
+  const handleBreedChange = (e) => {
+    setSelectedBreed(e.target.value);
+  };
+
+  //filter korar logic ekhane both by breed and by name
   const filteredCats = cats.filter(cat => 
-    searchTerm === '' || cat.name.toLowerCase().includes(searchTerm.toLowerCase())
+    (selectedBreed === '' || cat.breed === selectedBreed) &&
+    (searchTerm === '' || cat.name.toLowerCase().includes(searchTerm.toLowerCase()))
   );
   return (
     <section className="text-center mt-4">
@@ -54,6 +61,17 @@ export default function AvailableCats() {
           onChange={handleSearchChange} 
           style={{ marginRight: '10px', padding: '5px',marginBottom:'10px' }}
         />
+      {/*ekhane breed er dropdown added*/}
+      <select value={selectedBreed} onChange={handleBreedChange} style={{ padding: '5px' }}>
+        <option value="">All Breeds</option>
+        <option value="Sphynx">Sphynx</option>
+        <option value="Peterbald">Peterbald</option>
+        <option value="Birman">Birman</option>
+        <option value="Abyssinian">Abyssinian</option>
+        <option value="Persian">Persian</option>
+        <option value="Bengal">Bengal</option>
+        <option value="Siamese">Siamese</option>
+      </select>
       </div>
 
 
