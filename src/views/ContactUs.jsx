@@ -26,12 +26,12 @@ export default function ContactUs() {
       <h2>Contact Us</h2>
       <p>We would love to hear from you!</p>
 
-      <div className="contact-details" style={{ marginBottom: '20px' }}>
+      <div className="contact-details" style={{ marginBottom: '20px', }}>
         <p>Email: purrfect@gmail.com</p>
         <p>Contact Number: +1234567890</p>
       </div>
       
-      <form onSubmit={handleSubmit} style={{ maxWidth: '600px', margin: '0 auto' }}>
+      <form onSubmit={handleSubmit} style={{ maxWidth: '600px', margin: '0 auto' ,}}>
         <div className="form-group" style={{ marginBottom: '15px' }}>
           <label htmlFor="name">Name</label>
           <input
