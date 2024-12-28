@@ -11,6 +11,7 @@ const availableCats = [
 
 export default function AvailableCats() {
   const [cats, setCats] = useState([]);
+  const [searchTerm,setSearchTerm]=useState('');
 
   useEffect(() => {
     // Fetch cat images from an API endpoint and assign it to the featuredCats list
@@ -31,13 +32,34 @@ export default function AvailableCats() {
     fetchCatImages();
   }, []);
 
+  //handler for searching cats
+  const handleSearchChange=(e)=>{
+    setSearchTerm(e.target.value);
+  };
+
+  //filter korar logic ekhane
+  const filteredCats = cats.filter(cat => 
+    searchTerm === '' || cat.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <section className="text-center mt-4">
       <h2>Available Cats</h2>
       <p>Meet our adorable cats looking for their forever home!</p>
 
+      <div className="filters"> {/* added search here */}
+        <input 
+          type="text" 
+          placeholder="Search by name" 
+          value={searchTerm} 
+          onChange={handleSearchChange} 
+          style={{ marginRight: '10px', padding: '5px',marginBottom:'10px' }}
+        />
+      </div>
+
+
+
       <div className="mt-2 row g-4 cats-container" id="cats-container">
-        {cats.map((cat, i) => (
+        {filteredCats.map((cat, i) => (
           <div key={i} className="col-md-4" style={{ marginBottom: '20px' }}>
             <div className="cat-card">
               <img src={cat.image} alt={cat.name} className="img-fluid mb-2" style={{ borderRadius: '8px', height: '200px', objectFit: 'cover'}} />
